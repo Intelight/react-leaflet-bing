@@ -1,4 +1,11 @@
-.babelrc
-.gitignore
-.npmignore
-.nvmrc
+.*
+**/tsconfig.json
+**/webpack.config.js
+node_modules
+**/*.ts
+!**/*.d.ts
+**/*.tsx
+**/*.tgz
+lib
+example
+images

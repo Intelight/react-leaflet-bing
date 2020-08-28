@@ -1,10 +1,11 @@
+// @ts-ignore As there is conflict in the @types/leaflet
 L.BingLayer = L.TileLayer.extend({
 	options: {
 		subdomains: [0, 1, 2, 3],
 		type: 'Aerial',
 		attribution: 'Bing',
 		culture: '',
-    style: ''
+    	style: ''
 	},
 
 	initialize: function (bing_key, options) {
@@ -31,10 +32,11 @@ L.BingLayer = L.TileLayer.extend({
 	getTileUrl: function (tilePoint) {
 		var zoom = this._getZoomForUrl();
 		var subdomains = this.options.subdomains,
-			s = this.options.subdomains[Math.abs((tilePoint.x + tilePoint.y) % subdomains.length)];
-		return this._url.replace('{subdomain}', s)
-				.replace('{quadkey}', this.tile2quad(tilePoint.x, tilePoint.y, zoom))
-				.replace('{culture}', this.options.culture);
+		s = this.options.subdomains[Math.abs((tilePoint.x + tilePoint.y) % subdomains.length)];
+		const new_url = this._url.replace('{subdomain}', s)
+							.replace('{quadkey}', this.tile2quad(tilePoint.x, tilePoint.y, zoom))
+							.replace('{culture}', this.options.culture);
+		return new_url;
 	},
 
 	loadMetadata: function () {
@@ -67,18 +69,22 @@ L.BingLayer = L.TileLayer.extend({
 		var r = meta.resourceSets[0].resources[0];
 		this.options.subdomains = r.imageUrlSubdomains;
 		this._url = r.imageUrl;
+		console.log(this._url);
 		if (r.imageryProviders) {
 			for (var i = 0; i < r.imageryProviders.length; i++) {
 				var p = r.imageryProviders[i];
 				for (var j = 0; j < p.coverageAreas.length; j++) {
 					var c = p.coverageAreas[j];
-					var coverage = {zoomMin: c.zoomMin, zoomMax: c.zoomMax, active: false};
-					var bounds = new L.LatLngBounds(
+					var coverage = {
+						zoomMin: c.zoomMin, 
+						zoomMax: c.zoomMax, 
+						active: false,
+						bounds: new L.LatLngBounds(
 							new L.LatLng(c.bbox[0]+0.01, c.bbox[1]+0.01),
 							new L.LatLng(c.bbox[2]-0.01, c.bbox[3]-0.01)
-					);
-					coverage.bounds = bounds;
-					coverage.attrib = p.attribution;
+						),
+						attrib: p.attribution
+					};
 					this._providers.push(coverage);
 				}
 			}
@@ -127,6 +133,7 @@ L.BingLayer = L.TileLayer.extend({
 	}
 });
 
+// @ts-ignore -- Let JS be js
 L.bingLayer = function (bing_key, options) {
     return new L.BingLayer(bing_key, options);
 };

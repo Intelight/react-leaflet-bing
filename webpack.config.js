@@ -1,9 +1,14 @@
+const path = require('path');
+
 /* eslint-disable */
 module.exports = {
   output: {
     library: 'ReactLeaflet',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    filename: 'react-leaflet-bing.js',
+    path: path.resolve(__dirname, 'dist')
   },
+  entry: path.resolve(__dirname, 'src', 'index.ts'),
   externals: [
     {
       leaflet: {
@@ -11,14 +16,6 @@ module.exports = {
         commonjs: 'leaflet',
         commonjs2: 'leaflet',
         root: 'L'
-      }
-    },
-    {
-      jquery: {
-        amd: 'jquery',
-        commonjs: 'jquery',
-        commonjs2: 'jquery',
-         root: 'JQuery'
       }
     },
     {
@@ -37,9 +34,16 @@ module.exports = {
       }
     }
   ],
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js']
+  },
   module: {
-    loaders: [
-      {test: /\.js$/, exclude: /node_modules/, loader: 'babel'}
+    rules: [
+      {
+        test: /\.(ts|tsx)$/, 
+        exclude: /node_modules/, 
+        use: ['ts-loader']
+      }
     ]
   }
 };

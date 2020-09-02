@@ -1,0 +1,1 @@
+/// <reference path="react-leaflet-bing.d.ts" />

@@ -2,9 +2,7 @@
 **/tsconfig.json
 **/webpack.config.js
 node_modules
-**/*.ts
-!**/*.d.ts
-**/*.tsx
+src
 **/*.tgz
 lib
 example

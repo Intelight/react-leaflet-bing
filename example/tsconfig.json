@@ -4,13 +4,10 @@
         "target": "ES6",
         "outDir": "lib",
         "sourceMap": true,
-        "declaration": true,
-        "declarationDir": "types",
-        "declarationMap": true,
         "jsx": "react",
         "esModuleInterop": true,
         "moduleResolution": "Node"
     },
-    "include": [ "./src/**/*.ts", "./src/**/*.tsx" ],
+    "include": [ "./**/*.ts", "./**/*.tsx" ],
     "exclude": [ "node_modules", "dist"]
 }

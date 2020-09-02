@@ -28,3 +28,5 @@ declare module 'leaflet' {
 
     export function bingLayer(bingkey: string, props: Bing.BingLayerPropsTileLayer): BingLayer;
 }
+
+export * from './index';

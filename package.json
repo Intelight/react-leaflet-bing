@@ -1,8 +1,9 @@
 {
   "name": "react-leaflet-bing",
-  "version": "4.2.7",
+  "version": "4.3.2",
   "description": "Bing layer as React compoment for Leaflet",
   "main": "dist/react-leaflet-bing.js",
+  "types": "types/react-leaflet-bing.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean:lib": "rm -Rf ./lib",

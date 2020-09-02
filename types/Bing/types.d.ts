@@ -1,5 +1,5 @@
 import { Bing } from 'leaflet';
-import { ContextProps, GridLayer, LayerGroup } from 'react-leaflet';
+import { ContextProps, GridLayer, GridLayerProps } from 'react-leaflet';
 export declare enum MapLayers {
     Basemap = "Basemap",
     Buildings = "Buildings",
@@ -18,13 +18,14 @@ export declare enum ImagerySets {
     CanvasLight = "CanvasLight",
     CanvasGrey = "CanvasGrey"
 }
-export interface BingLayerOwnProps extends Bing.BingLayerPropsTileLayer, GridLayer, ContextProps {
+export interface BingLayerOwnProps extends Bing.BingLayerPropsTileLayer, GridLayerProps, ContextProps {
     type: ImagerySets;
 }
-export interface BingGroupLayerOwnProps extends Bing.BingLayerProps, LayerGroup, ContextProps {
+export interface BingGroupLayerOwnProps extends Bing.BingLayerProps {
     ml: MapLayers;
     type: ImagerySets;
     name: string;
 }
 export declare class BingLayer extends GridLayer<BingLayerOwnProps> {
 }
+//# sourceMappingURL=types.d.ts.map

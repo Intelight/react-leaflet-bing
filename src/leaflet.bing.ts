@@ -33,9 +33,16 @@ L.BingLayer = L.TileLayer.extend({
 		var zoom = this._getZoomForUrl();
 		var subdomains = this.options.subdomains,
 		s = this.options.subdomains[Math.abs((tilePoint.x + tilePoint.y) % subdomains.length)];
-		const new_url = this._url.replace('{subdomain}', s)
-							.replace('{quadkey}', this.tile2quad(tilePoint.x, tilePoint.y, zoom))
-							.replace('{culture}', this.options.culture);
+		const new_url = (this.options?.ml === "TrafficFlow") ?
+			this._url.replace('{subdomain}', s)
+					 .replace(/.({quadkey})/, 't$1')
+					 .replace('jpeg', 'png')
+					 .replace('{quadkey}', this.tile2quad(tilePoint.x, tilePoint.y, zoom))
+					 .replace('{culture}', this.options.culture)
+			:
+		 	this._url.replace('{subdomain}', s)
+			  	  	 .replace('{quadkey}', this.tile2quad(tilePoint.x, tilePoint.y, zoom))
+					 .replace('{culture}', this.options.culture);
 		return new_url;
 	},
 
